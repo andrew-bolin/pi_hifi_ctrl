@@ -10,7 +10,6 @@
 #############
 
 RC5_PER = 889 # half-bit period (microseconds)
-#TX_PIN = 4
 CA_RC5_SYS = 16
 
 # dictionary of possible commands, mapped to the code we need to send
@@ -79,8 +78,6 @@ def posint(n):
             return int(n)
         else:
             raise ValueError
-            #msg = str(n) + " is not a positive integer"
-            #raise argparse.ArgumentTypeError(msg)
     except ValueError:
             msg = str(n) + " is not a positive integer"
             raise argparse.ArgumentTypeError(msg)
