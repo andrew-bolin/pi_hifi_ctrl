@@ -18,6 +18,7 @@ Connect your pin to the signal wire of an RCA cable, and a ground to the shield.
 Plug the RCA cable in to the "Ctrl In" socket on your Cambridge Audio amplifier.
 
 Usage:
+
     ca_amp_ctrl.py [-h] [--pin [PIN]] [--repeat [REPEAT]] command
 
 Where command is exactly one of:
