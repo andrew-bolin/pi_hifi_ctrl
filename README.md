@@ -19,7 +19,9 @@ If you have another Cambridge Audio amplifier, please contact me, I'll do my bes
 * Connect your pin to the signal wire of an RCA cable, and a ground to the shield.
 * Plug the RCA cable in to the "Ctrl In" socket on your Cambridge Audio amplifier.
 
-##Usage:##
+##ca_amp_ctrl.py Usage:##
+
+ca_amp_ctrl.py is used to send a command to the amplifier.
 
     ca_amp_ctrl.py [-h] [--pin [GPIO number]] [--repeat [positive integer]] command
 
@@ -41,3 +43,9 @@ The other optional arguments are:
 **-h** merely shows brief usage help  
 **--pin [GPIO number]** to specify the GPIO pin to transmit on (default: 4)  
 **--repeat [positive integer]** to repeat the command (e.g. vol+/vol- only move the volume a very small amount)  
+
+##cec_stream.py Usage:##
+
+cec_stream.py is used to receive commands from a TV via HDMI and forward them on to the amplifier. The amplifier will turn on & off when the TV does, and will respond to the TV's volume & mute buttons.
+
+Run it inside a 'screen' session, so it will keep running when your terminal session times out.
