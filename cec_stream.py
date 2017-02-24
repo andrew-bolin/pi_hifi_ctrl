@@ -11,6 +11,7 @@
 VOL_UP = "key pressed: volume up (41)"
 VOL_DN = "key pressed: volume down (42)"
 MUTE   = "key pressed: mute (43)"
+READY  = "audio status '7f'" # message sent by cec-client to TV at end of handshaking
 
 VOL_STEPS = 4
 
@@ -105,11 +106,6 @@ p = subprocess.Popen(args = ['/usr/bin/cec-client', '--type',  'a', 'RPI'],
         stdout = subprocess.PIPE,
         universal_newlines = True)
 
-# improvement ideas:
-# * epoll (tried briefly)
-# * repeat volume commands while button held
-#   (cec-client reports keydown & keyup events, could set a flag and request 1/2 increments per loop while flag set, unset flag on keyup event of course...)
-#   this would reduce the lag currently experienced when holding volume buttons (first movement is quick but some time before TV repeats the keydown event)
 
 while p.poll() is None:
     l = p.stdout.readline()
@@ -119,21 +115,24 @@ while p.poll() is None:
         if power == "'on'":
             cbs = pi.wave_send_once(wave_mnch(build_rc5(CA_RC5_SYS,cmd['ampon']),PIN,RC5_PER))
             print("Amp on")
-            p.stdin.write("tx 50:72:01") # tell TV "Audio System Active" (i.e. turn off TV speakers)
+            p.stdin.write("tx 50:72:01 \n") # tell TV "Audio System Active" (i.e. turn off TV speakers)
             p.stdin.flush()
         elif power == "'standby'":
             cbs = pi.wave_send_once(wave_mnch(build_rc5(CA_RC5_SYS,cmd['ampoff']),PIN,RC5_PER))
             print("Amp off")
+    elif READY in l:
+        p.stdin.write("tx 50:7a:08 \n") # report vol level 08
+        p.stdin.flush()                 # (TV won't reduce volume if it thinks it's at zero)
     elif VOL_UP in l:
         print("Volume up")
-        p.stdin.write("tx 50:7a:0A \r\n") # TV won't reduce volume if it thinks it's at zero
+        p.stdin.write("tx 50:7a:10 \n") # report vol level 16
         p.stdin.flush()
         for i in range(VOL_STEPS):
             cbs = pi.wave_send_once(wid_up)
             time.sleep(0.05)
     elif VOL_DN in l:
         print("Volume down")
-        p.stdin.write("tx 50:7a:05 \n") # TV won't reduce volume if it thinks it's at zero
+        p.stdin.write("tx 50:7a:04 \n") # report vol level 04
         p.stdin.flush()
         for i in range(VOL_STEPS):
             cbs = pi.wave_send_once(wid_dn)
@@ -143,4 +142,5 @@ while p.poll() is None:
 
 
 sys.exit(0)
+
 
