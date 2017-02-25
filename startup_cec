@@ -1,0 +1,39 @@
+#!/bin/sh
+# /etc/init.d/startup_cec
+
+### BEGIN INIT INFO
+# Provides:          cec_stream
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Simple script to start a program at boot
+# Description:       A simple script from www.stuffaboutcode.com which will start / stop a program a boot / shutdown.
+### END INIT INFO
+
+# original: http://www.stuffaboutcode.com/2012/06/raspberry-pi-run-program-at-start-up.html
+# place in /etc/init.d, make executable, and register auto start with
+# sudo update-rc.d startup_cec defaults
+
+
+case "$1" in
+  start)
+    echo "Starting CEC translator"
+    # run application you want to start
+    # (change this path to suit location of script)
+    screen -d -m /home/pi/cec/cec_stream.py
+    ;;
+  stop)
+    echo "Stopping CEC translator"
+    # kill application you want to stop
+    killall cec_stream.py
+    ;;
+  *)
+    echo "Usage: /etc/init.d/startup_cec {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
+
+
