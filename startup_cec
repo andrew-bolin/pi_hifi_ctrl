@@ -16,7 +16,7 @@ case "$1" in
     killall cec_stream.py
     ;;
   *)
-    echo "Usage: /etc/init.d/startup_ab {start|stop}"
+    echo "Usage: /etc/init.d/startup_cec {start|stop}"
     exit 1
     ;;
 esac
