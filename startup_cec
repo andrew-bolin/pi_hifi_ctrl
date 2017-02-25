@@ -17,7 +17,9 @@
 
 
 case "$1" in
-  start)
+  start)    
+    echo "Starting pigpiod"
+    pigpiod
     echo "Starting CEC translator"
     # run application you want to start
     # (change this path to suit location of script)
