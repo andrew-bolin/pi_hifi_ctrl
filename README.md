@@ -48,4 +48,9 @@ The other optional arguments are:
 
 cec_stream.py is used to receive commands from a TV via HDMI and forward them on to the amplifier. The amplifier will turn on & off when the TV does, and will respond to the TV's volume & mute buttons.
 
-Run it inside a 'screen' session, so it will keep running when your terminal session times out.
+Copy cec_stream.py into /home/pi/cec/ and startup_cec in /etc/init.d/ , then run:
+
+    sudo update-rc.d startup_cec defaults
+
+It will then start/stop when you boot/shutdown.
+Plug an HDMI cable from your pi into the TV, preferably via the "ARC" HDMI port.
