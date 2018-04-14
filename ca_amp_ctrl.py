@@ -41,8 +41,7 @@ cmd = {
 
 # build RC5 message, return as int
 def build_rc5(sys, cmd):
-
-    RC5_START = 0b110
+    RC5_START = 0b100 + (0b010 * (cmd<64))
     RC5_SYS = int(sys)
     RC5_CMD = int(cmd)
 
