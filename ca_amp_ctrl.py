@@ -9,7 +9,7 @@ import libamp
 parser = argparse.ArgumentParser(description="Control Cambridge Audio amplifiers.")
 parser.add_argument('--pin', nargs='?', default=4, type=int)
 parser.add_argument('--repeat', nargs='?', default=1, type=libamp.posint)
-parser.add_argument('command', nargs=1, choices=amp.cmd.keys())
+parser.add_argument('command', nargs=1, choices=libamp.cmd.keys())
 args = parser.parse_args()
 
 command = args.command[0].lower()
