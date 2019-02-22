@@ -5,7 +5,7 @@ This project aims to breathe new life into old Hi-Fi amplifiers/receivers, by ad
 
 ## Supported Amplifiers:
 
-* Cambridge Audio azur 540A/640A v2
+* Cambridge Audio azur 540A/640A v2/840A v2
 
 If you have another Cambridge Audio amplifier, please contact me, I'll do my best to find the relevant documentation and add support for it.
 
@@ -13,6 +13,7 @@ If you have another Cambridge Audio amplifier, please contact me, I'll do my bes
 
 * **Python 3** (apt-get install python3)
 * **pigpio library**, with *pigpiod* running (see https://github.com/joan2937/pigpio/ or http://abyz.co.uk/rpi/pigpio/).
+* **cec-utils** (apt-get install cec-utils) if **/usr/bin/cec-client** is not already installed.
 
 ## Wiring:
 * Pick an unused GPIO pin on your Pi (the default is GPIO 4). 
