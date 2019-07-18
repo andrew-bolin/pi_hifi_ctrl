@@ -47,15 +47,17 @@ cmd = {
 # Functions #
 #############
 
+# initial value for toggle (global variable, quick hack, a class would be better...)
+toggle = True
 # build RC5 message, return as int
 def build_rc5(cmd):
-    RC5_START = 0b100 + (0b010 * (cmd<64))
+    global toggle
+    toggle = not toggle
+    RC5_START = 0b100 + (0b010 * (cmd<64)) + (0b001 * toggle)
     RC5_SYS = int(CA_RC5_SYS)
     RC5_CMD = int(cmd)
-
     # RC-5 message has a 3-bit start sequence, a 5-bit system ID, and a 6-bit command.
     RC5_MSG = ((RC5_START & 0b111) << 11) | ((RC5_SYS & 0b11111) << 6) | (RC5_CMD & 0b111111)
-    
     return RC5_MSG
 
 # manchester encode waveform. Period is the half-bit period in microseconds.
