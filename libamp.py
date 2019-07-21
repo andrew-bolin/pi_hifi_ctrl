@@ -92,13 +92,9 @@ def posint(n):
             raise argparse.ArgumentTypeError(msg)
 
 def execute(pin, command, repeat):
-
-    # generate RC5 message (int)
-    rc5_msg = build_rc5(cmd[command])
-
-    # generate digital manchester-encoded waveform
-    wid = wave_mnch(rc5_msg, pin)
-
     for i in range(repeat):
+        # generate RC5 message (int)
+        rc5_msg = build_rc5(cmd[command])
+        # generate digital manchester-encoded waveform
+        wid = wave_mnch(rc5_msg, pin)
         cbs = pi.wave_send_once(wid)
-    
