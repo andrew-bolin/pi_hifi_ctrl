@@ -1,11 +1,11 @@
-# pi_hifi_ctrl
+# pi\_hifi\_ctrl
 # Raspberry Pi Hi-Fi Amplifier Control
 
 This project aims to breathe new life into old Hi-Fi amplifiers/receivers, by adding network (or automatic) control via a Raspberry Pi.
 
 ## Supported Amplifiers:
 
-* Cambridge Audio azur 540A/640A v2, 840A v2
+* Cambridge Audio azur 540A/640A v2, 840A v2, CXA81
 
 If you have another Cambridge Audio amplifier, please contact me, I'll do my best to find the relevant documentation and add support for it.
 
@@ -20,13 +20,14 @@ If you have another Cambridge Audio amplifier, please contact me, I'll do my bes
 * Connect your pin to the signal wire of an RCA cable, and a ground to the shield.
 * Plug the RCA cable in to the "Ctrl In" socket on your Cambridge Audio amplifier.
 
-## ca_amp_ctrl.py Usage:
+## ca\_amp\_ctrl.py Usage:
 
-ca_amp_ctrl.py is used to send a command to the amplifier.
+`ca_amp_ctrl.py` is used to send a command to the amplifier.
 
-    ca_amp_ctrl.py [-h] [--pin [GPIO number]] [--repeat [positive integer]] command
+    ca_amp_ctrl.py [-h] [--pin [GPIO number]] [--repeat [positive integer]] [--model [model number]] command
 
-Exactly one command must be specified.
+Exactly one command must be specified. 
+Commands differ between amplifier models, for the 540A/640A they are:
 
 | Command        | Function     | 
 | ------------- |-------------| 
@@ -42,15 +43,18 @@ Exactly one command must be specified.
 
 The other optional arguments are:
 
-**-h** merely shows brief usage help  
+**-h** merely shows brief usage help (including a full list of available commands and amplifier models)  
 **--pin [GPIO number]** to specify the GPIO pin to transmit on (default: 4)  
 **--repeat [positive integer]** to repeat the command (e.g. vol+/vol- only move the volume a very small amount)  
+**--model [model number]** to select your amplifier model, available choices are: CXA81, 840A, or 540A.
+The default is 540A, which should also be compatible with the 640A.  
 
-## cec_stream.py Usage:
+## cec\_stream.py Usage:
 
-cec_stream.py is used to receive commands from a TV via HDMI and forward them on to the amplifier. The amplifier will turn on & off when the TV does, and will respond to the TV's volume & mute buttons.
+`cec_stream.py` is used to receive commands from a TV via HDMI and forward them on to the amplifier.
+The amplifier will turn on & off when the TV does, and will respond to the TV's volume & mute buttons.
 
-Copy cec_stream.py into /home/pi/cec/ and startup_cec in /etc/init.d/ , then run:
+Copy `cec_stream.py` into `/home/pi/cec/` and `startup_cec` into `/etc/init.d/`, then run:
 
     sudo update-rc.d startup_cec defaults
 
