@@ -46,8 +46,9 @@ The other optional arguments are:
 **-h** merely shows brief usage help (including a full list of available commands and amplifier models)  
 **--pin [GPIO number]** to specify the GPIO pin to transmit on (default: 4)  
 **--repeat [positive integer]** to repeat the command (e.g. vol+/vol- only move the volume a very small amount)  
-**--model [model number]** to select your amplifier model, available choices are: CXA81, 840A, or 540A.
-The default is 540A, which should also be compatible with the 640A.  
+**--model [model number]** to select your amplifier model, available choices are: CXA60, 840A, or 540A.
+The default is 540A, which should also be compatible with the 640A. 
+CXA60 may also be compatible with CXA81. 
 
 ## cec\_stream.py Usage:
 

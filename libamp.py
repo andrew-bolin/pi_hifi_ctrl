@@ -72,13 +72,18 @@ command_table = {
         "spkselect": 20,
         "clipoff": 21,  # enters Balance mode
     },
-    "CXA81": {"volup": 17, "voldown": 16, "ampon": 110, "ampoff": 111},
+    "CXA60": {
+        "muteon": 50,
+        "muteoff": 51,
+        "vol+": 16,
+        "vol-": 17,
+        "poweron": 110,
+        "poweroff": 111,
+    },
 }
 
 all_models = {model for model in command_table}
-all_commands = {
-    command for model in all_models for command in command_table[model]
-}
+all_commands = {command for model in all_models for command in command_table[model]}
 
 #############
 # Functions #
